@@ -27,7 +27,10 @@ class ViewController: UIViewController {
 
     //    MARK: - private constants
     
-    private let colors: [UIColor] = [#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1),  #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)]
+    private var allColors: [[UIColor]] = [[#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1),  #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)],
+                                          [#colorLiteral(red: 0.0612327978, green: 0.1471716464, blue: 0.2177636027, alpha: 1), #colorLiteral(red: 0.1067980155, green: 0.242403388, blue: 0.3461189568, alpha: 1)]]
+    private var colors: [UIColor] = [#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1),  #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)]
+    private let ListsName = "Lists"
     private let doneBackgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
     let transformLayer = CATransformLayer()
     
@@ -803,7 +806,7 @@ extension ViewController: UIScrollViewDelegate{
                 
                 if switchToLists {
                     print("User released in List of Lists mode")
-                    self.switchLists(list: "Lists")
+                    self.switchLists(list: ListsName)
                 } else {
                     // if at the moment the dragging ended (user released) the offset passed the threshold we are in adding mode
                     print("User released in Add mode")
@@ -827,6 +830,11 @@ extension ViewController: UIScrollViewDelegate{
         titleLabel.text = list
         self.loadToDoItems()
         self.tableView.reloadData()
+        if (list == ListsName) {
+            self.colors = self.allColors[1]
+        } else {
+            self.colors = self.allColors[0]
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -864,7 +872,7 @@ public extension UIColor {
 // MARK: - TodoCellDelegate Methods
 extension ViewController:TodoCellDelegate{
     func todoCellWasTapped(cell: TodoCell) -> Bool {
-        if list == "Lists" {
+        if list == ListsName {
             self.switchLists(list: cell.textField.text!)
             return true
         } else {
