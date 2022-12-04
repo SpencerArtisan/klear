@@ -47,17 +47,25 @@ struct KlearWidgetEntryView : View {
 
     private let colors: [UIColor] = [#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1), #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)]
  
-
-    
     var shape : RoundedRectangle { RoundedRectangle(cornerRadius: 11) }
     
-    fileprivate func item(text: String) -> some View {
+    fileprivate func verticalItem(text: String) -> some View {
         return Text(text)
             .foregroundColor(.white)
             .font(.footnote)
             .padding(.leading, 10)
-            .padding([.top, .bottom], 6)
+            .padding([.top, .bottom], 3)
             .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(colors[3]))
+            .containerShape(shape)
+    }
+    
+    fileprivate func flowItem(text: String) -> some View {
+        return Text(text)
+            .foregroundColor(.white)
+            .font(.footnote)
+            .padding([.leading, .trailing], 10)
+            .padding([.top, .bottom], 3)
             .background(Color(colors[3]))
             .containerShape(shape)
     }
@@ -66,26 +74,59 @@ struct KlearWidgetEntryView : View {
         return entry.configuration.List ?? "Personal"
     }
     
-    fileprivate func items() ->  [some View] {
+    fileprivate func verticalItems() ->  [some View] {
+        let mainItems: ToDos = ItemRepo.allIn(moc: CoreDataStack.regularStore().moc!, list: list())
+        let count = min(5, mainItems.count())
+        let displayItems = (count > 0) ? mainItems.todos[0...count - 1] : []
+        return displayItems.map { verticalItem(text: $0.getTitle()) }
+    }
+    
+    fileprivate func flowItems() ->  [some View] {
         let mainItems: ToDos = ItemRepo.allIn(moc: CoreDataStack.regularStore().moc!, list: list())
         let count = min(4, mainItems.count())
         let displayItems = (count > 0) ? mainItems.todos[0...count - 1] : []
-        return displayItems.map { item(text: $0.getTitle()) }
+        return displayItems.map { flowItem(text: $0.getTitle()) }
+    }
+    
+    fileprivate func flow() -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            Text(list())
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .font(.footnote)
+            FlowStack(spacing: CGSize(width: 4, height: 4)) {
+                ForEach(0..<self.flowItems().count) { index in
+                    self.flowItems()[index]
+                }
+            }
+        }
+    }
+    
+    fileprivate func vertical() -> some View {
+        return VStack(alignment: .leading, spacing: 4) {
+            Text(list())
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .font(.footnote)
+            ForEach(0..<self.verticalItems().count) { index in
+                self.verticalItems()[index]
+            }
+        }
+    }
+    
+    @ViewBuilder var itemView: some View {
+        if (entry.configuration.Display == Display.flow) {
+            flow()
+        } else {
+            vertical()
+        }
     }
     
     var body: some View {
         ZStack {
             Color(colors[0])
             ZStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(list())
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .font(.footnote)
-                    ForEach(0..<self.items().count) { index in
-                        self.items()[index]
-                    }
-                }
+                itemView
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 6)
             }

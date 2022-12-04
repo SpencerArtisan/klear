@@ -25,6 +25,8 @@
 		979054ED28E9EF4900FF8E13 /* KlearWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 979054E828E9EF4800FF8E13 /* KlearWidget.intentdefinition */; };
 		979054F028E9EF4900FF8E13 /* KlearWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 979054DF28E9EF4700FF8E13 /* KlearWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		97ABF6E6293CBB6D00A55D89 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 97ABF6E5293CBB6D00A55D89 /* Intents.intentdefinition */; };
+		97ABF6E8293CC9B900A55D89 /* HFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ABF6E7293CC9B900A55D89 /* HFlow.swift */; };
+		97ABF6EA293CCD8B00A55D89 /* FlowStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ABF6E9293CCD8B00A55D89 /* FlowStack.swift */; };
 		BD14C91C24A5002700209708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14C91B24A5002700209708 /* AppDelegate.swift */; };
 		BD14C91E24A5002700209708 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14C91D24A5002700209708 /* SceneDelegate.swift */; };
 		BD14C92024A5002700209708 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14C91F24A5002700209708 /* ViewController.swift */; };
@@ -79,6 +81,8 @@
 		979054E928E9EF4900FF8E13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		979054EB28E9EF4900FF8E13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97ABF6E5293CBB6D00A55D89 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		97ABF6E7293CC9B900A55D89 /* HFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HFlow.swift; sourceTree = "<group>"; };
+		97ABF6E9293CCD8B00A55D89 /* FlowStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowStack.swift; sourceTree = "<group>"; };
 		BD14C91824A5002700209708 /* Klear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Klear.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD14C91B24A5002700209708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD14C91D24A5002700209708 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				979054E928E9EF4900FF8E13 /* Assets.xcassets */,
 				979054EB28E9EF4900FF8E13 /* Info.plist */,
 				97ABF6E5293CBB6D00A55D89 /* Intents.intentdefinition */,
+				97ABF6E7293CC9B900A55D89 /* HFlow.swift */,
+				97ABF6E9293CCD8B00A55D89 /* FlowStack.swift */,
 			);
 			path = KlearWidget;
 			sourceTree = "<group>";
@@ -291,6 +297,8 @@
 				979054E728E9EF4800FF8E13 /* KlearWidget.swift in Sources */,
 				974212CF28F0E3E700FA3E37 /* ItemRepo.swift in Sources */,
 				974212CD28F0E3B500FA3E37 /* Model.xcdatamodeld in Sources */,
+				97ABF6EA293CCD8B00A55D89 /* FlowStack.swift in Sources */,
+				97ABF6E8293CC9B900A55D89 /* HFlow.swift in Sources */,
 				977970AE28FC350E0048D8C7 /* ToDos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
