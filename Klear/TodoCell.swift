@@ -45,7 +45,7 @@ class TodoCell: UITableViewCell, UITextFieldDelegate  {
     //   MARK: - gesture recognizers
     private var panGestureRecoginer: UIPanGestureRecognizer?
     private var tapGestureRecognizer: UITapGestureRecognizer?
-    
+
     //    MARK: - vars for initial states
     private var initialLeftConstraintForCheckLabel = CGFloat()
     private var initialRightContsraintForDeleteLabel = CGFloat()
@@ -95,6 +95,7 @@ class TodoCell: UITableViewCell, UITextFieldDelegate  {
         }
         
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(handleTap))
+        
         tapGestureRecognizer?.delegate = self
         if tapGestureRecognizer != nil{
             self.addGestureRecognizer(tapGestureRecognizer!)
@@ -116,12 +117,14 @@ class TodoCell: UITableViewCell, UITextFieldDelegate  {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        print(1)
         textField.isUserInteractionEnabled = false
         delegate?.todoCellWasModified(cell: self) // used to inform the controller that text editing was done
         TodoCell.isTextFieldEditing = false
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        print(2)
         TodoCell.isTextFieldEditing = true
         delegate?.todoCellWillModify(cell: self) // used to inform the controller that text editing is about to begin
     }
@@ -157,7 +160,7 @@ class TodoCell: UITableViewCell, UITextFieldDelegate  {
                 return isPanning
             }
             // don't want to handle together taps from controller and the view
-        }else if gestureRecognizer == tapGestureRecognizer{
+        }else if gestureRecognizer == tapGestureRecognizer {
             return true
         }
         return false
@@ -325,25 +328,32 @@ class TodoCell: UITableViewCell, UITextFieldDelegate  {
 
 //    this is used to trigger textField editing
     @objc func handleTap(sender: UITapGestureRecognizer) {
+        let loc = sender.location(in: self)
+        let onLeftHandSide = loc.x < textField.frame.width / 2
+        
         switch sender.state {
-
         case .ended:
-            //  inform the delegate
-            if (self.delegate?.todoCellWasTapped(cell: self) == false)
+            if (onLeftHandSide || self.delegate?.todoCellWasTapped(cell: self) == false)
             {
-                //            check of the textField is part of the active view hierarchy
-                //            (otherwise canBecomeFirstResponder has undefined results)
-                if textField.window != nil && !isAlreadyDone{
-                    //                if textField.canBecomeFirstResponder{
-                    print("Cell in edit mode")
-                    textField.becomeFirstResponder()
-                    textField.isUserInteractionEnabled = true
-                    TodoCell.isTextFieldEditing = true
-                    //                }
-                }
+                editCell()
             }
+        
         default:
             return
+        }
+    }
+    
+    fileprivate func editCell() {
+        print("editCell")
+       //            check of the textField is part of the active view hierarchy
+        //            (otherwise canBecomeFirstResponder has undefined results)
+        if textField.window != nil && !isAlreadyDone{
+            //                if textField.canBecomeFirstResponder{
+            print("Cell in edit mode")
+            textField.becomeFirstResponder()
+            textField.isUserInteractionEnabled = true
+            TodoCell.isTextFieldEditing = true
+            //                }
         }
     }
     

@@ -344,6 +344,7 @@ class ViewController: UIViewController {
         if let newCell =  tableView.cellForRow(at: indexPath) as? TodoCell{
             print("Take focus")
             newCell.textField.text = ""
+            newCell.becomeFirstResponder()
             newCell.textField.becomeFirstResponder()
         }
     }
@@ -784,7 +785,7 @@ extension ViewController: UIScrollViewDelegate{
             placeHolderViewHeightConstraint.constant = 0.0
             let baseAlpha:CGFloat = 0.2
             let dragPercentage = abs(scrollOffset) < abs(scrollOffsetThreshold) ? scrollOffset/scrollOffsetThreshold : 1.0
-            let switchToLists = scrollOffset/scrollOffsetThreshold > 1.7
+            let switchToLists = scrollOffset/scrollOffsetThreshold > 3
             
             // set up the layer
             newItemCellPlaceholder.backgroundColor = switchToLists ? UIColor.black : colors.first!
@@ -944,7 +945,7 @@ extension ViewController:TodoCellDelegate{
         CATransaction.begin()
         //                get the absolute position of the cell and calculate
         //                the distance to the the top of the table
-        let distanceToTop = tableView.convert(cell.frame, to: view).minY - 60
+        let distanceToTop = tableView.convert(cell.frame, to: view).minY - 68
         let currentOffset = tableView.contentOffset.y
         let newOffset = distanceToTop + currentOffset
         view.layoutIfNeeded()
@@ -964,8 +965,8 @@ extension ViewController:TodoCellDelegate{
     
     
     func todoCellWasModified(cell: TodoCell) {
-        updateCellAndReturnToPreviousState(cell: cell)
         print("Cell was modified " + cell.textField.text!)
+        updateCellAndReturnToPreviousState(cell: cell)
         
         if let indexPath = tableView.indexPath(for: cell){
             let index = todos.rowNumberToIndex(from: indexPath.row)
