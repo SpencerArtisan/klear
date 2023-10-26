@@ -151,13 +151,13 @@ struct KlearWidgetEntryView : View {
     
     var body: some View {
         ZStack {
-            foregroundColour()
             ZStack {
                 itemView
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 6)
             }
             .padding(.horizontal, 8.0)
+            .containerBackground(for: .widget){foregroundColour()}
         }
     }
 }
@@ -172,6 +172,8 @@ struct KlearWidget: Widget {
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
+        .contentMarginsDisabled()
+        .containerBackgroundRemovable(false)
     }
 }
 
