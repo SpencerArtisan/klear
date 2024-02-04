@@ -36,7 +36,7 @@ class ItemRepo: NSManagedObject {
     class func allIn(moc: NSManagedObjectContext, list: String) -> ToDos {
         let items = allRaw(moc: moc, list: list)
         let todos = ToDos(items: items.map { ToDo(title: $0.title ?? "", done: $0.done)})
-        print("Loaded from " + list + ": " + todos.to_s())
+        print("Loaded from \(todos.count()) items in list \(list)")
         return todos
     }
     
