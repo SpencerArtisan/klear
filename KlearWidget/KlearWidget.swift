@@ -84,7 +84,7 @@ struct KlearWidgetEntryView : View {
     var shape : RoundedRectangle { RoundedRectangle(cornerRadius: 11) }
     
     fileprivate func deeplinkURL() -> URL {
-        URL(string: "widget-deeplink://list?id=" + list())!
+        URL(string: "widget-deeplink://list?id=\(list())&col=\(entry.configuration.Colour.rawValue)")!
     }
 
     var body: some View {

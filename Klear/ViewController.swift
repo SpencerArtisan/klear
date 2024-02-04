@@ -27,9 +27,18 @@ class ViewController: UIViewController {
 
     //    MARK: - private constants
     
-    private var allColors: [[UIColor]] = [[#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1),  #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)],
-                                          [#colorLiteral(red: 0.0612327978, green: 0.1471716464, blue: 0.2177636027, alpha: 1), #colorLiteral(red: 0.1067980155, green: 0.242403388, blue: 0.3461189568, alpha: 1)]]
-    private var colors: [UIColor] = [#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1),  #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)]
+    private var allColors: [[UIColor]] = [
+        [#colorLiteral(red: 0.0612327978, green: 0.1471716464, blue: 0.2177636027, alpha: 1), #colorLiteral(red: 0.1067980155, green: 0.242403388, blue: 0.3461189568, alpha: 1)],
+        [#colorLiteral(red: 0.8509803922, green: 0, blue: 0.0862745098, alpha: 1), #colorLiteral(red: 0.862745098, green: 0.1137254902, blue: 0.09019607843, alpha: 1), #colorLiteral(red: 0.8745098039, green: 0.2274509804, blue: 0.09411764706, alpha: 1), #colorLiteral(red: 0.8862745098, green: 0.3450980392, blue: 0.09803921569, alpha: 1), #colorLiteral(red: 0.8941176471, green: 0.4588235294, blue: 0.1019607843, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.5725490196, blue: 0.1058823529, alpha: 1), #colorLiteral(red: 1, green: 0.7647058824, blue: 0.2431372549, alpha: 1)],
+        [#colorLiteral(red: 0.4136029482, green: 0.677290082, blue: 0.1465499401, alpha: 1), #colorLiteral(red: 0.4698219299, green: 0.7042465806, blue: 0.160248518, alpha: 1), #colorLiteral(red: 0.5247913599, green: 0.7311549187, blue: 0.1948102415, alpha: 1), #colorLiteral(red: 0.5801013112, green: 0.753967762, blue: 0.2159562707, alpha: 1), #colorLiteral(red: 0.6334363222, green: 0.7807858586, blue: 0.2478569746, alpha: 1), #colorLiteral(red: 0.6862785816, green: 0.8075666428, blue: 0.2727800012, alpha: 1), #colorLiteral(red: 0.725912571, green: 0.8266130686, blue: 0.2885423899, alpha: 1)],
+        [#colorLiteral(red: 0.4787971973, green: 0.314438343, blue: 0.9557709098, alpha: 1), #colorLiteral(red: 0.5438430905, green: 0.3648558259, blue: 0.9623785615, alpha: 1), #colorLiteral(red: 0.6043596864, green: 0.4155195355, blue: 0.9687760472, alpha: 1), #colorLiteral(red: 0.6642792821, green: 0.4703497887, blue: 0.9748064876, alpha: 1), #colorLiteral(red: 0.7253383994, green: 0.5168190002, blue: 0.976685226, alpha: 1), #colorLiteral(red: 0.7727643847, green: 0.5640009642, blue: 0.9867911935, alpha: 1), #colorLiteral(red: 0.8326075673, green: 0.6187940836, blue: 0.9920439124, alpha: 1)],
+        [#colorLiteral(red: 0.3049082458, green: 0.5391378999, blue: 0.9297524095, alpha: 1), #colorLiteral(red: 0.3319737911, green: 0.5706816316, blue: 0.9200450778, alpha: 1), #colorLiteral(red: 0.3646841049, green: 0.6021195054, blue: 0.9143176079, alpha: 1), #colorLiteral(red: 0.3931383789, green: 0.6296228766, blue: 0.904502213, alpha: 1), #colorLiteral(red: 0.4270198941, green: 0.657012701, blue: 0.894515872, alpha: 1), #colorLiteral(red: 0.459210813, green: 0.6884343028, blue: 0.8841599822, alpha: 1), #colorLiteral(red: 0.5193114877, green: 0.7473400235, blue: 0.8716130257, alpha: 1)],
+        [#colorLiteral(red: 0.5777024627, green: 0.592645824, blue: 0.6052832007, alpha: 1), #colorLiteral(red: 0.60515517, green: 0.6200971007, blue: 0.6327351928, alpha: 1), #colorLiteral(red: 0.6365295649, green: 0.6514698863, blue: 0.6641087532, alpha: 1), #colorLiteral(red: 0.6639820337, green: 0.6789211035, blue: 0.691560626, alpha: 1), #colorLiteral(red: 0.6953561902, green: 0.7102939487, blue: 0.7229340672, alpha: 1), #colorLiteral(red: 0.7228084207, green: 0.7377451062, blue: 0.7503857613, alpha: 1), #colorLiteral(red: 0.7816342711, green: 0.7965689301, blue: 0.8092107177, alpha: 1)]]
+//    
+//    private var switchColors: [UIColor] = [#colorLiteral(red: 0.0612327978, green: 0.1471716464, blue: 0.2177636027, alpha: 1), #colorLiteral(red: 0.1067980155, green: 0.242403388, blue: 0.3461189568, alpha: 1)]
+//    
+    private var scheme = 1
+
     private let ListsName = "Lists"
     private let doneBackgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
     let transformLayer = CATransformLayer()
@@ -158,6 +167,7 @@ class ViewController: UIViewController {
           // Perform actions to reload the view
           // For example, if you're using a table view:
         if (!SceneDelegate.openedFromWidget.isEmpty && SceneDelegate.openedFromWidget != self.list) {
+            self.scheme = SceneDelegate.widgetColorScheme
             switchLists(list: SceneDelegate.openedFromWidget)
         }
         tableView.reloadData()
@@ -393,14 +403,18 @@ class ViewController: UIViewController {
         }
     }
 
+    private func colors() -> [UIColor] {
+        allColors[self.scheme]
+    }
+    
     private func getColor(for index:Int, in colorCount:Int = 0) -> UIColor{
         var color:UIColor
-        if todos.countOfNotDoneItems < colors.count {
-            color = colors[index]
+        if todos.countOfNotDoneItems < colors().count {
+            color = colors()[index]
             return color
         }else{
-            let startColor = colors.first!
-            let endColor = colors.last!
+            let startColor = colors().first!
+            let endColor = colors().last!
             var percentage:CGFloat
             percentage = colorCount == 0 ? CGFloat(index)/CGFloat(todos.countOfNotDoneItems) : CGFloat(index)/CGFloat(colorCount)
             let color = UIColor.interpolate(from: startColor, to: endColor, with: percentage)
@@ -798,7 +812,7 @@ extension ViewController: UIScrollViewDelegate{
             let switchToLists = scrollOffset/scrollOffsetThreshold > 3
             
             // set up the layer
-            newItemCellPlaceholder.backgroundColor = switchToLists ? UIColor.black : colors.first!
+            newItemCellPlaceholder.backgroundColor = switchToLists ? UIColor.black : colors().first!
             let alpha = baseAlpha + dragPercentage * (1-baseAlpha)
             newItemCellPlaceholder.isHidden = false
             newItemCellPlaceholder.alpha = alpha
@@ -842,9 +856,9 @@ extension ViewController: UIScrollViewDelegate{
         self.loadToDoItems()
         self.tableView.reloadData()
         if (list == ListsName) {
-            self.colors = self.allColors[1]
+            self.scheme = 0
         } else {
-            self.colors = self.allColors[0]
+            self.scheme = SceneDelegate.widgetColorScheme
         }
     }
     

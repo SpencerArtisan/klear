@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     public static var openedFromWidget: String = ""
+    public static var widgetColorScheme: Int = 1
     
 
     @available(iOS 13.0, *)
@@ -61,8 +62,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("🚀 Launched from widget")
         let components = URLComponents(url: context.url, resolvingAgainstBaseURL: true)
         let id = components?.queryItems?.first(where: { $0.name == "id" })?.value
-        print("Widget was for list \(id)")
+        let color = components?.queryItems?.first(where: { $0.name == "col" })?.value
+        print("Widget was for list \(id) in colour \(color)")
         SceneDelegate.openedFromWidget = id!
+        SceneDelegate.widgetColorScheme = Int(color!, radix: 10)!
     }
 }
 
