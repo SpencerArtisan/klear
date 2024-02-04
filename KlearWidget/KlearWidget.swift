@@ -82,7 +82,10 @@ struct KlearWidgetEntryView : View {
     }
     
     var shape : RoundedRectangle { RoundedRectangle(cornerRadius: 11) }
-
+    
+    fileprivate func deeplinkURL() -> URL {
+        URL(string: "widget-deeplink://list?id=" + list())!
+    }
 
     var body: some View {
         ZStack {
@@ -90,6 +93,7 @@ struct KlearWidgetEntryView : View {
                 itemView
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, 6)
+                    .widgetURL(deeplinkURL())
             }
             .padding(.horizontal, 8.0)
             .containerBackground(for: .widget){foregroundColour()}
@@ -119,19 +123,7 @@ struct KlearWidgetEntryView : View {
             }
         }
     }
-    
-    fileprivate func list() -> String {
-        return entry.configuration.List ?? "Personal"
-    }
-
-    fileprivate func isPreview() -> Bool {
-        return entry.isPreview
-    }
-    
-    fileprivate func previewToDos() -> ToDos {
-        return ToDos(items: [ToDo(title: "Weed garden", done: false)])
-    }
-
+ 
     fileprivate func verticalItems() ->  [some View] {
         let mainItems: ToDos = isPreview() ? previewToDos() : ItemRepo.allIn(moc: CoreDataStack.regularStore().moc!, list: list())
         let count = min(5, mainItems.count())
@@ -183,6 +175,19 @@ struct KlearWidgetEntryView : View {
             .background(backgroundColour())
             .containerShape(shape)
     }
+        
+    fileprivate func list() -> String {
+        return entry.configuration.List ?? "Personal"
+    }
+
+    fileprivate func isPreview() -> Bool {
+        return entry.isPreview
+    }
+    
+    fileprivate func previewToDos() -> ToDos {
+        return ToDos(items: [ToDo(title: "Weed garden", done: false)])
+    }
+
 }
 
 @main

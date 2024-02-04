@@ -154,11 +154,21 @@ class ViewController: UIViewController {
     
 
 //MARK: - initial setup
-       
+    @objc func reloadView() {
+          // Perform actions to reload the view
+          // For example, if you're using a table view:
+        if (!SceneDelegate.openedFromWidget.isEmpty && SceneDelegate.openedFromWidget != self.list) {
+            switchLists(list: SceneDelegate.openedFromWidget)
+        }
+        tableView.reloadData()
+      }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadView), name: UIApplication.willEnterForegroundNotification, object: nil)
+
         titleLabel.text = list
         
         // setup the table view and the custom cell

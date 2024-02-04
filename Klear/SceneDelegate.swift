@@ -11,6 +11,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    public static var openedFromWidget: String = ""
+    
 
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,6 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
+    }
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        maybeOpenedFromWidget(urlContexts: URLContexts)
     }
     @available(iOS 13.0, *)
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,6 +54,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
+        print("? \(urlContexts.count)")
+       
+        guard let context: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) else { return }
+        print("🚀 Launched from widget")
+        let components = URLComponents(url: context.url, resolvingAgainstBaseURL: true)
+        let id = components?.queryItems?.first(where: { $0.name == "id" })?.value
+        print("Widget was for list \(id)")
+        SceneDelegate.openedFromWidget = id!
+    }
 }
 
